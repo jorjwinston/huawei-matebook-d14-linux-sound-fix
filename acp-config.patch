@@ -1,0 +1,23 @@
+diff --git a/sound/soc/amd/acp-config.c b/sound/soc/amd/acp-config.c
+index 0d977f4f7..6f4aebf87 100644
+--- a/sound/soc/amd/acp-config.c
++++ b/sound/soc/amd/acp-config.c
+@@ -183,6 +183,20 @@ static const struct config_entry config_table[] = {
+ 			{}
+ 		},
+ 	},
++	{
++		.flags = FLAG_AMD_LEGACY,
++		.device = ACP_PCI_DEV_ID,
++		.dmi_table = (const struct dmi_system_id []) {
++			{
++				.matches = {
++					DMI_EXACT_MATCH(DMI_BOARD_VENDOR, "HUAWEI"),
++					DMI_EXACT_MATCH(DMI_PRODUCT_NAME, "NBM-WXX9"),
++					DMI_EXACT_MATCH(DMI_PRODUCT_VERSION, "M1010"),
++				},
++			},
++			{}
++		},
++	},
+ };
