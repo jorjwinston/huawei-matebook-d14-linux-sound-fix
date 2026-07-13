@@ -1,0 +1,29 @@
+diff --git a/sound/soc/amd/acp/acp3x-es83xx/acp3x-es83xx.c b/sound/soc/amd/acp/acp3x-es83xx/acp3x-es83xx.c
+index 46fff565d..5cf90fe64 100644
+--- a/sound/soc/amd/acp/acp3x-es83xx/acp3x-es83xx.c
++++ b/sound/soc/amd/acp/acp3x-es83xx/acp3x-es83xx.c
+@@ -228,8 +228,8 @@ static int acp3x_es83xx_configure_gpios(struct acp3x_es83xx_private *priv)
+ 	priv->enable_spk_gpio.crs_entry_index = 0;
+ 	priv->enable_hp_gpio.crs_entry_index = 1;
+ 
+-	priv->enable_spk_gpio.active_low = true;
+-	priv->enable_hp_gpio.active_low = true;
++	priv->enable_spk_gpio.active_low = false;
++	priv->enable_hp_gpio.active_low = false;
+ 
+ 	priv->gpio_mapping[0].name = "speakers-enable-gpios";
+ 	priv->gpio_mapping[0].data = &priv->enable_spk_gpio;
+@@ -382,17 +382,31 @@ static const struct dmi_system_id acp3x_es83xx_dmi_table[] = {
+ 		},
+ 		.driver_data = (void *)(ES83XX_ENABLE_DMIC),
+ 	},
++	{
++		.matches = {
++			DMI_EXACT_MATCH(DMI_BOARD_VENDOR, "HUAWEI"),
++			DMI_EXACT_MATCH(DMI_PRODUCT_NAME, "NBM-WXX9"),
++			DMI_EXACT_MATCH(DMI_PRODUCT_VERSION, "M1010"),
++		},
++		.driver_data = (void *)(ES83XX_ENABLE_DMIC | ES83XX_48_MHZ_MCLK),
++	},
+ 	{}
+ };
